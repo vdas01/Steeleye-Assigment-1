@@ -2,6 +2,7 @@ import styles from "./Card.module.css";
 
 const Card = ({ cardData, title }) => {
   if (!cardData) return null;
+  console.log(cardData)
   return (
     <div className={styles.container}>
       <div className={styles.title}>{title}</div>

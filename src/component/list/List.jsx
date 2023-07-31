@@ -8,7 +8,7 @@ import styles from "./List.module.css";
 import timeStamps from "../../assets/timeStamps.json";
 
 
-const List = ({ rows,currency,searchText }) => {
+const List = ({ rows,currency,searchText,setSelectedOrderDetails,setSelectedOrderTimeStamps }) => {
   rows = rows.filter((row)=>(
          row["&id"].includes(searchText)
   ))
@@ -18,7 +18,7 @@ const List = ({ rows,currency,searchText }) => {
     let ans;
     timeStamps.results.map((result)=>{
       if(result['&id'].toString() === id.toString())
-      ans = result?.timestamps?.orderSubmitted;
+      ans = result?.timestamps;
       return 0;
     })
     return ans;
@@ -40,12 +40,13 @@ const List = ({ rows,currency,searchText }) => {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <ListRow key={Math.random()} >
+          <ListRow key={Math.random()} row={row} setSelectedOrderDetails={setSelectedOrderDetails} setSelectedOrderTimeStamps={setSelectedOrderTimeStamps}
+            calc={calc}>
             <ListRowCell>{row["&id"]}</ListRowCell>
             <ListRowCell>{row.executionDetails.buySellIndicator}</ListRowCell>
             <ListRowCell>{row.executionDetails.orderStatus}</ListRowCell>
-            <ListRowCell>{calc(row["&id"])}</ListRowCell>
-            <ListRowCell>{row.bestExecutionData.orderVolume.EUR}</ListRowCell>
+            <ListRowCell>{calc(row["&id"])?.orderSubmitted}</ListRowCell>
+            <ListRowCell>{row.bestExecutionData.orderVolume[currency]}</ListRowCell>
           </ListRow>
         ))}
       </tbody>

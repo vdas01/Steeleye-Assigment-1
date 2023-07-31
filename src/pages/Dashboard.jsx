@@ -38,7 +38,8 @@ const Dashboard = () => {
           <Card cardData={selectedOrderDetails} title="Selected Order Details"/>
           <Card cardData={selectedOrderTimeStamps} title="Selected Order Timestamps"/>
         </div>
-        <List rows={mockData.results} currency={currency} searchText={searchText} />
+        <List rows={mockData.results} currency={currency} searchText={searchText} 
+        setSelectedOrderDetails={setSelectedOrderDetails} setSelectedOrderTimeStamps={setSelectedOrderTimeStamps}/>
       </div>
     </div>
   );
